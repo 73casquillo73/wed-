@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Familia Castillo - 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            color: #bf0000;
+            text-align: center;
+            font-size: 5.5rem;
+            margin: 10px 0;
+        }
+
+        .month {
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            color: #8ee700;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .month h2 {
+            color: #8ee700;
+            margin: 0;
+            padding: 15px 0;
+            font-size: 5rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px;
+            margin-top: 15px;
+        }
+
+        .day {
+            padding: 1px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            font-size: 1.1rem;
+            color: #373737;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .birthday {
+            background-color: #FFFF00;
+            color: #cd422b;
+            font-weight: bold;
+        }
+
+        /* Fondos para cada mes */
+        .month:nth-child(1) { background-image: url('images/enero.jpg'); }
+        .month:nth-child(2) { background-image: url('images/febrero.jpg'); }
+        .month:nth-child(3) { background-image: url('images/marzo.jpg'); }
+        .month:nth-child(4) { background-image: url('images/abril.jpg'); }
+        .month:nth-child(5) { background-image: url('images/mayo.jpg'); }
+        .month:nth-child(6) { background-image: url('images/junio.jpg'); }
+        .month:nth-child(7) { background-image: url('images/julio.jpg'); }
+        .month:nth-child(8) { background-image: url('images/agosto.jpg'); }
+        .month:nth-child(9) { background-image: url('images/septiembre.jpg'); }
+        .month:nth-child(10) { background-image: url('images/octubre.jpg'); }
+        .month:nth-child(11) { background-image: url('images/noviembre.jpg'); }
+        .month:nth-child(12) { background-image: url('images/diciembre.jpg'); }
+    </style>
+</head>
+<body>
+
+<h1>Familia Castillo - 2025</h1>
+
+<div id="calendar"></div>
+
+<script>
+    const months = [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
+
+    const birthdays = {
+        "1-7": "Leyanet y Steve",
+        "1-14": "Yusniet y Yusviet",
+        "1-17": "Antonio",
+        "1-25":"Michelagel",
+        "1-26":"Helen",
+        "1-27":"Neivys",
+        "2-3": "Alexi",
+        "2-17": "Rachel",
+        "2-18": "Paulito",
+        "3-1": "Reiner",
+        "3-11": "Raydel",
+        "3-13": "Maria",
+        "3-18": "Sarvadol",
+        "3-20": "Nabil",
+        "3-25": "Yaine",
+        "4-4": "Darling",
+        "4-10": "Birulo",
+        "4-24": "Elisa",
+        "4-25": "Angelina",
+        "5-2": "Marleny",
+        "5-7": "Grabiela",
+        "5-8": "Leyani",
+        "5-21": "Jorge Luis",
+        "5-24": "Sofia",
+        "6-9": "Melizandel",
+        "6-21": "Medelin",
+        "6-14": "Yordany",
+        "7-18": "Yakira y Roxana",
+        "8-7": "Leosbani",
+        "8-8": "Joce",
+        "8-11": "Angel",
+        "8-23": "Medesperta",
+        "8-25": "Mariolys",
+        "8-27": "Mayte",
+        "9-5": "Yaima",
+        "9-6": "Suliesky",
+        "9-17": "Yobani",
+        "9-27": "El peje",
+        "9-30": "Anita",
+        "10-1": "Castillo",
+        "10-5": "Nashly",
+        "10-6": "David",
+        "10-11": "Neisa",
+        "10-13": "Meivy y Victo",
+        "10-19": "Roberto",
+        "10-23": "Daniel",
+        "11-7": "Ediesky",
+        "11-9": "Magalys",
+        "11-10": "Marielis",
+        "11-13": "Daliana",
+        "11-15": "Elis",
+        "11-17": "Carlito",
+        "11-21": "Meghan",
+        "12-4": "Beatriz",
+        "12-9": "Ihosmani y Ihasmani",
+        "12-8": "yirena",
+        "12-14": "Elaine",
+        "12-24": "Thiago",
+        "12-28": "jojito",
+        // Agrega más cumpleaños aquí...
+    };
+
+    function createCalendar() {
+        const calendarDiv = document.getElementById("calendar");
+
+        months.forEach((month, index) => {
+            const monthDiv = document.createElement("div");
+            monthDiv.className = "month";
+            monthDiv.innerHTML = `<h2>${month}</h2>`;
+
+            const daysDiv = document.createElement("div");
+            daysDiv.className = "days";
+
+            const daysInMonth = new Date(2025, index + 1, 0).getDate();
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayDiv = document.createElement("div");
+                dayDiv.className = "day";
+                const dateKey = `${index + 1}-${day}`;
+
+                if (birthdays[dateKey]) {
+                    dayDiv.classList.add("birthday");
+                    dayDiv.innerHTML = `${day} - ${birthdays[dateKey]}`;
+                } else {
+                    dayDiv.textContent = day;
+                }
+
+                daysDiv.appendChild(dayDiv);
+            }
+
+            monthDiv.appendChild(daysDiv);
+            calendarDiv.appendChild(monthDiv);
+        });
+    }
+
+    createCalendar();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Familia Castillo - 2025</title>
+    <style>
+        @font-face {
+            font-family: 'Animales Fantastic';
+            src: url('ruta/a/tu/fuente/AnimalesFantastic.ttf') format('truetype');
+        }
+        
+        body {
+            font-family: 'Animales Fantastic', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('images/fondo.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            color: #bf0000;
+            text-align: center;
+            font-size: 5.5rem;
+            margin: 100px 0;
+        }
+
+        .month {
+            border-radius: 50px;
+            padding: 20px;
+            margin: 40px auto;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            color: #8ee700;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .month h2 {
+            color: #8ee700;
+            margin: 0;
+            padding: 100px 0;
+            font-size: 3rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px;
+            margin-top: 20px;
+        }
+
+        .day, .week-day {
+            padding: 1px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            font-size: 1.1rem;
+            color: #373737;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .birthday {
+            background-color: #FFFF00;
+            color: #cd422b;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Fondos para cada mes */
+        .month:nth-child(1) { background-image: url('images/enero.jpg'); }
+        .month:nth-child(2) { background-image: url('images/febrero.jpg'); }
+        .month:nth-child(3) { background-image: url('images/marzo.jpg'); }
+        .month:nth-child(4) { background-image: url('images/abril.jpg'); }
+        .month:nth-child(5) { background-image: url('images/mayo.jpg'); }
+        .month:nth-child(6) { background-image: url('images/junio.jpg'); }
+        .month:nth-child(7) { background-image: url('images/julio.jpg'); }
+        .month:nth-child(8) { background-image: url('images/agosto.jpg'); }
+        .month:nth-child(9) { background-image: url('images/septiembre.jpg'); }
+        .month:nth-child(10) { background-image: url('images/octubre.jpg'); }
+        .month:nth-child(11) { background-image: url('images/noviembre.jpg'); }
+        .month:nth-child(12) { background-image: url('images/diciembre.jpg'); }
+
+        .image-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-popup img {
+            max-width: 80%;
+            max-height: 80%;
+            border: 5px solid white;
+            border-radius: 10px;
+        }
+    </style>
+    <script>
+        function showImage(name) {
+            const imageUrl = `images/${name.toLowerCase().replace(' ', '_')}.jpg`;
+            const imagePopup = document.createElement('div');
+            imagePopup.className = 'image-popup';
+
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            imagePopup.appendChild(img);
+
+            imagePopup.onclick = () => {
+                document.body.removeChild(imagePopup);
+            };
+
+            document.body.appendChild(imagePopup);
+        }
+    </script>
+</head>
+<body>
+
+<!-- Agregar música de fondo -->
+    <audio controls>
+        <source src="audio/mi_alma_tiene_prisa.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+<h1>Familia Castillo - 2025</h1>
+
+<div id="calendar"></div>
+
+<script>
+    const months = [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
+
+    const birthdays = {
+        "1-7": "leyanet_y_steve",
+        "1-14": "yusniet_y_yusviet",
+        "1-17": "antonio",
+        "1-25": "michelagel",
+        "1-26": "helen",
+        "1-27": "neivys",
+        "2-3": "alexi",
+        "2-17": "rachel",
+        "2-18": "paulito",
+        "3-1": "reiner",
+        "3-11": "raydel",
+        "3-13": "maria",
+        "3-18": "sarvadol",
+        "3-20": "nabil",
+        "3-25": "yaine",
+        "4-4": "darling",
+        "4-10": "birulo",
+        "4-24": "elisa",
+        "4-25": "angelina",
+        "5-2": "marleny",
+        "5-7": "grabiela",
+        "5-8": "leyani",
+        "5-21": "jorge Luis",
+        "5-24": "sofia",
+        "6-9": "melizandel",
+        "6-21": "madelin",
+        "6-14": "yordany",
+        "7-18": "yakira_y_Roxana",
+        "8-7": "leosbani",
+        "8-8": "joce",
+        "8-11": "angel",
+        "8-23": "toty",
+        "8-25": "mariolys",
+        "8-27": "mayte",
+        "9-5": "yaima",
+        "9-6": "suliesky",
+        "9-17": "yobani",
+        "9-27": "peje",
+        "9-30": "anita",
+        "10-1": "castillo",
+        "10-5": "nashly",
+        "10-6": "david",
+        "10-11": "neisa",
+        "10-13": "meivy_y_Victo",
+        "10-19": "roberto",
+        "10-23": "daniel",
+        "11-7": "ediesky",
+        "11-9": "magalys",
+        "11-10": "marielis",
+        "11-13": "daliana",
+        "11-15": "elis",
+        "11-17": "carlito",
+        "11-21": "meghan",
+        "12-4": "beatriz",
+        "12-9": "ihosmani_y_ihasmani",
+        "12-8": "yirena",
+        "12-14": "elaine",
+        "12-24": "thiago",
+        "12-28": "jojito",
+        // Agrega más cumpleaños aquí...
+    };
+
+    function createCalendar() {
+        const calendarDiv = document.getElementById("calendar");
+        const weekDays = ["L", "M", "M", "J", "V", "S", "D"];
+
+        months.forEach((month, index) => {
+            const monthDiv = document.createElement("div");
+            monthDiv.className = "month";
+            monthDiv.innerHTML = `<h2>${month}</h2>`;
+
+            const daysDiv = document.createElement("div");
+            daysDiv.className = "days";
+
+            weekDays.forEach(weekDay => {
+                const weekDayDiv = document.createElement("div");
+                weekDayDiv.className = "week-day";
+                weekDayDiv.textContent = weekDay;
+                daysDiv.appendChild(weekDayDiv);
+            });
+
+            const firstDay = new Date(2025, index, 1).getDay();
+            const daysInMonth = new Date(2025, index + 1, 0).getDate();
+
+            for (let blank = 0; blank < (firstDay === 0 ? 6 : firstDay - 1); blank++) {
+                const blankDiv = document.createElement("div");
+                blankDiv.className = "day";
+                daysDiv.appendChild(blankDiv);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayDiv = document.createElement("div");
+                dayDiv.className = "day";
+                const dateKey = `${index + 1}-${day}`;
+
+                if (birthdays[dateKey]) {
+                    dayDiv.classList.add("birthday");
+                    dayDiv.innerHTML = `<button onclick="showImage('${birthdays[dateKey]}')">${day} - ${birthdays[dateKey]}</button>`;
+                } else {
+                    dayDiv.textContent = day;
+                }
+
+                daysDiv.appendChild(dayDiv);
+            }
+
+            monthDiv.appendChild(daysDiv);
+            calendarDiv.appendChild(monthDiv);
+        });
+    }
+
+    createCalendar();
+</script>
+
+</body>
+</html>
